@@ -24,7 +24,7 @@ def get_cities_of_country(country_iso2_code):
     print("Finding edge cities...")
     country_iso2_code = country_iso2_code.lower()
     assert country_iso2_code in country_set, print('Code was not found, please use iso2 codes, please refer to'
-                                                   ' https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Current_codes for list of iso codes')
+                                                   ' https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Current_codes for iso codes')
     df_c = df[df.Country == country_iso2_code]
     # We assume that northernmost city - is city with biggest Latitude and southernmost is the opposite - with the least Latitude
     # The same goes for easternmost and westernmost but with Longitude as measure
@@ -53,16 +53,13 @@ def _distance(lat1, lon1, lat2, lon2):
     return 12742 * asin(sqrt(a))
 
 
-def _closest(coord, n_cities):
-    values = [(x, v, city, country) for x, v, city, country in df[['Latitude', 'Longitude', 'AccentCity', 'Country']].values]
-    return sorted(values, key=lambda p: _distance(coord[0], coord[1], p[0], p[1]))[:n_cities]
-
-
 def get_nearest_cities(lat, long, n_cities):
     print('Finding nearest...')
-    closest_l = _closest((float(lat), float(long)), int(n_cities))
-    print('Closest {:n} city(ies) for given coordinates Latitude - {:.4f}, Longitude - {:.4f} is/are:'.format(int(n_cities), float(lat),
-                                                                                                              float(long)))
+    # args parsed as string, so casting is required
+    lat, long, n_cities = float(lat), float(long), int(n_cities)
+    used_values = [(x, v, city, country) for x, v, city, country in df[['Latitude', 'Longitude', 'AccentCity', 'Country']].values]
+    closest_l = sorted(used_values, key=lambda p: _distance(lat, long, p[0], p[1]))[:n_cities]
+    print('Closest {:n} city(ies) for given coordinates Latitude - {:.4f}, Longitude - {:.4f} is/are:'.format(n_cities, lat, long))
     for city in closest_l:
         print('Country - {:s}\nCity - {:s}\nLatitude - {:.4f}\nLongitude - {:.4f}'.format(city[3], city[2], city[0], city[1]))
 
