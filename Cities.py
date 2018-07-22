@@ -13,7 +13,7 @@ contry_s = set(df.Country.values)
 def get_cities_of_country(country_iso2_code):
     country_iso2_code = 'us'
     country_iso2_code = country_iso2_code.lower()
-    assert country_iso2_code in contry_s, print('Code was not found, please use iso2 codes, codes could be foun here -'
+    assert country_iso2_code in contry_s, print('Code was not found, please use iso2 codes, please refer to'
                                                 ' https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Current_codes')
     df_c = df[df.Country == country_iso2_code]
     north = df_c.loc[df_c.Latitude.idxmax()]
