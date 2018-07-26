@@ -66,6 +66,6 @@ def get_nearest_cities(lat, long, n_cities):
 
 func = get_cities_of_country if args.func == 'get_cities' else \
     get_distance_between_cities if args.func == 'get_distance' else \
-        get_nearest_cities if args.func == 'get_nearest' else None
+    get_nearest_cities if args.func == 'get_nearest' else None
 assert func is not None, print('Wrong func name use "get_cities", "get_distance" or "get_nearest"')
 func(*args.parameters)
