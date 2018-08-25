@@ -8,7 +8,7 @@ dispatcher = updater.dispatcher
 
 
 def start(bot, update):
-    bot.send_message(chat_id=update.message.chat_id, text="Hey Roman send me your expenses in format '^-?\d+\s.+[01]$")
+    bot.send_message(chat_id=update.message.chat_id, text="Hey Roman, send me your expenses in format '^-?\d+\s.+[01]$")
 
 
 def process_string(bot, update):
