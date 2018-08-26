@@ -1,8 +1,10 @@
 import os
 import pandas as pd
 
+home_var = 'USERPROFILE' if os.name == 'nt' else 'HOME'
+
 days_l = [day for day in open(
-    os.path.join(os.environ['USERPROFILE'], 'Desktop', 'Money.txt'), 'r').read().replace('\n', '').split(';') if day]
+    os.path.join(os.environ[home_var], 'Desktop', 'Money.txt'), 'r').read().replace('\n', '').split(';') if day]
 
 # split each day into each position and divide date and transactions
 temp_0 = [[date_, trans.split(',')] for day in days_l for date_, trans in [day.split(':')]]
@@ -30,6 +32,7 @@ for block in temp_2:
 temp_2.insert(-1, cashed_block) if cashed_block else None
 temp_2.sort()
 
-pd.DataFrame(data=temp_2, columns=['Date', 'Income/Expense', 'Sum', 'Category', 'Description', 'People_who', 'Extended_decription',
-                                   r'Cash(1)\Non-cash(0)']).to_csv(os.path.join(os.environ['USERPROFILE'], 'Desktop', 'money_out.tsv'),
-                                                                   index=False, header=False, sep='\t')
+pd.DataFrame(data=temp_2,
+             columns=['Date', 'Income/Expense', 'Sum', 'Category', 'Description', 'People_who', 'Extended_decription',
+                      r'Cash(1)\Non-cash(0)']).to_csv(os.path.join(os.environ[home_var], 'Desktop', 'money_out.tsv'),
+                                                      index=False, header=False, sep='\t')
