@@ -22,7 +22,6 @@ for block in temp_2:
     block.insert(3, '-')
     block.insert(5, '-'), block.insert(5, 'Me')
     block[0] = block[0].replace('.', '/')
-    block[2] = block[2].replace('.', ',')
     # alternative flow for cashed position, creates mirror position with income to match cashed expense position
     if block[4] == 'Cashed':
         block[3] = 'Cashed'
