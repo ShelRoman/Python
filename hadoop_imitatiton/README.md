@@ -16,4 +16,4 @@ the mapper and reducer have to be written in Python
 - Build container `docker build -t %container_name% .`
 - After container is built run it `docker run -it -v ${PWD}/res:/hadoop_task/res %container_name%`
 - In the container's terminal run `zcat biographies.list.gz | python3.6 mapper.py | sort -k1,1 | python3.6 reducer.py > res/result.txt`
-- Files with result will appear in the `'res'` dir under `'result.txt''` name
+- Files with result will appear in the `'res'` dir under `'result.txt'` name
